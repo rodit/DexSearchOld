@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CompatJar:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CompatJar_jar</output-path>
+    <root id="archive" name="CompatJar.jar">
+      <element id="module-output" name="CompatJar" />
+    </root>
+  </artifact>
+</component>

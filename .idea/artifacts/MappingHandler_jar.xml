@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MappingHandler:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MappingHandler_jar</output-path>
+    <root id="archive" name="MappingHandler.jar">
+      <element id="module-output" name="MappingHandler" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/MappingHandler/libs/gson-2.8.7.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

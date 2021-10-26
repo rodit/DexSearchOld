@@ -1,0 +1,3 @@
+class DMSaveMenuCreator {
+    java.util.ArrayList CreateMenu(android.content.Context,boolean,boolean,boolean,boolean,boolean,boolean,boolean,boolean,boolean,boolean)
+}
