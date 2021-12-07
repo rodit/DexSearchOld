@@ -147,7 +147,7 @@ class SaveToCameraRollActionHandler {
     }
 
     void exportMedia(*, *, *) {
-        .string "chat_media";
+        .string "SaveToCameraRollActionHandler";
     }
 }
 
@@ -213,16 +213,24 @@ certain class ChatReactionsBelowMessageViewModel {
     }
 }
 
+certain class QuotedMessageViewModel {
+    static void $<clinit>() {
+        .string "contentStatus";
+        .string "content";
+    }
+}
+
 class ChatModelBase {
 
     android.content.Context context;
-    !ChatLayouts chatLayout;
+    * chatLayout;
     !MessageDataModel messageData;
     java.lang.String senderId;
     java.util.Map _;
     boolean boolField;
     boolean _;
     #MediaDownloadStatus status;
+    !QuotedMessageViewModel quotedMessageViewModel;
     !ChatReactionsBelowMessageViewModel reactionsViewModel;
 
     java.lang.String $toString() {
@@ -259,7 +267,6 @@ class ChatModelSavedSnap {
         .call java.lang.Double->isNaN;
         .call android.content.Context->getResources;
         .field !MediaType->UNKNOWN;
-        .string "snap";
     }
 }
 
@@ -276,18 +283,21 @@ class ChatActionHelper {
 
 class ChatModelAudioNote {
 
-    void $<init>(android.content.Context, !ChatLayouts, !MessageDataModel, *, java.lang.String, java.util.Map, boolean, !ChatReactionsBelowMessageViewModel, ...) {
-        .string "chat_media";
-        .string "target";
-    }
+    !MediaItem _;
+    java.lang.String _;
+    java.lang.String _;
+    * _;
+    boolean _;
+
+    void $<init>(android.content.Context, !ChatLayouts, !MessageDataModel, *, java.lang.String, java.util.Map, boolean, !ChatReactionsBelowMessageViewModel, ...)
 
     android.net.Uri getUri()
 }
 
-very fuzzy class StreamingMethod {
+class StreamingMethod {
 
     java.lang.String $toString() {
-        .string contains "streamingMethod";
+        .string contains "StreamingInfo";
         .string contains "requestHeaders";
     }
 }
@@ -314,7 +324,7 @@ class OperaMediaInfo {
     }
 }
 
-late class EncryptionAlgorithm {
+late interface EncryptionAlgorithm {
     java.io.InputStream decryptStream(java.io.InputStream)
     java.io.OutputStream encryptStream(java.io.OutputStream)
 }
@@ -357,18 +367,6 @@ class GlobalErrorHandler {
         .string "prepareAudioPlayerForCurrentSnap error";
         .string "Prepare player error";
         .string "error while downloading: ";
-    }
-}
-
-class ReportStatusHandler {
-    define ERROR_CASE 0
-
-    int status;
-
-    * $invoke() {
-        .call android.content.Context->getString;
-        .field *->DISPLAY_ONLY;
-        .string "STATUS_BAR";
     }
 }
 
