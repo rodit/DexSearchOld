@@ -391,9 +391,9 @@ class OperaContextActions {
 
     void $<clinit>() {
         .string "share_send";
-        .string "IN_APP_REPORT";
-        .string "CONTEXT_MENU_EDIT";
-        .string "REPORT_AD";
+        .field *->IN_APP_REPORT;
+        .field *->EDIT;
+        .field *->REPORT_AD;
     }
 }
 
