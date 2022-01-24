@@ -1,6 +1,9 @@
 package xyz.rodit.dexsearch.schema2;
 
 import org.jf.dexlib2.Opcode;
+import org.jf.dexlib2.iface.Field;
+import org.jf.dexlib2.iface.Member;
+import org.jf.dexlib2.iface.Method;
 import org.jf.dexlib2.iface.MethodImplementation;
 import org.jf.dexlib2.iface.instruction.Instruction;
 import org.jf.dexlib2.iface.instruction.ReferenceInstruction;
@@ -9,8 +12,6 @@ import org.jf.dexlib2.iface.reference.MethodReference;
 import org.jf.dexlib2.iface.reference.StringReference;
 import org.jf.dexlib2.iface.reference.TypeReference;
 import xyz.rodit.dexsearch.schema2.resolver.Resolver;
-
-import javax.lang.model.type.ReferenceType;
 
 public abstract class MethodBytecodeMatcher implements Matcher<MethodImplementation> {
 
@@ -140,6 +141,56 @@ public abstract class MethodBytecodeMatcher implements Matcher<MethodImplementat
                 }
             }
             return false;
+        }
+    }
+
+    public static abstract class BytecodeMemberNameMatcher<T extends Member> extends NameMatcher {
+
+        private final boolean reference;
+
+        protected BytecodeMemberNameMatcher(String name, boolean reference) {
+            super(name, true);
+            this.reference = reference;
+        }
+
+        protected abstract T getBound(ClassMatch match, String name);
+
+        @Override
+        public boolean matches(Resolver resolver, String name) {
+            if (reference) {
+                T bound = getBound(resolver.getCurrent(), getName());
+                if (bound != null) {
+                    return bound.getName().equals(name);
+                }
+            } else {
+                return super.matches(resolver, name);
+            }
+
+            return false;
+        }
+    }
+
+    public static class BytecodeFieldNameMatcher extends BytecodeMemberNameMatcher<Field> {
+
+        protected BytecodeFieldNameMatcher(String name, boolean reference) {
+            super(name, reference);
+        }
+
+        @Override
+        protected Field getBound(ClassMatch match, String name) {
+            return match.getBoundField(name);
+        }
+    }
+
+    public static class BytecodeMethodNameMatcher extends BytecodeMemberNameMatcher<Method> {
+
+        protected BytecodeMethodNameMatcher(String name, boolean reference) {
+            super(name, reference);
+        }
+
+        @Override
+        protected Method getBound(ClassMatch match, String name) {
+            return match.getBoundMethod(name);
         }
     }
 }

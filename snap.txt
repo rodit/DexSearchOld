@@ -344,6 +344,8 @@ class InAppReportManagerImpl {
     void $<init>(...) {
         .string "InAppReportManagerImpl";
     }
+
+    * handle(*, ...)
 }
 
 class ReportHandler {
@@ -377,11 +379,12 @@ late class OperaActionMenuOptionViewModel {
     int textColorResource;
     java.lang.String eventName;
     boolean loading;
+    * actionMenuId;
 }
 
 class OperaContextActions {
     define REPORT_EVENT_NAME "IN_APP_REPORT"
-    define SAVE_EVENT_NAME "CONTEXT_MENU_SAVE"
+    define SAVE_EVENT_NAME "SAVE"
 
     static #OperaActionMenuOptionViewModel _;
     static #OperaActionMenuOptionViewModel _;
@@ -575,4 +578,132 @@ class FriendProfileTransformer {
         .string "Required value was null.";
         .call java.util.Collections->singletonList;
     }
+}
+
+class MemoriesPickerVideoDurationConfig {
+
+    long maxDuration;
+    java.util.concurrent.TimeUnit timeUnit;
+    int warningTextResource;
+
+    java.lang.String $toString() {
+        .string contains "MemoriesPickerVideoDurationConfig";
+        .string contains "durationUnits";
+    }
+}
+
+interface PublicProfileInfo {
+
+    java.lang.String _()
+    java.lang.Boolean _()
+    java.lang.Integer _()
+    java.lang.String _()
+    java.lang.String _()
+    java.lang.String $getId()
+    java.lang.String $getTitle()
+    java.lang.String _()
+    java.lang.String getProfilePictureUrl()
+}
+
+class FriendPublicProfileTile {
+
+    java.lang.String profilePictureUrl;
+
+    void $<init>(...) {
+        .field *->FRIEND_PROFILE_SNAP_PRO_PUBLIC_PROFILE;
+    }
+}
+
+class PublicProfileActionHandler {
+
+    void $<init>(...) {
+        .string "PublicProfileActionHandler";
+    }
+
+    void $reportProfile(...)
+}
+
+class PublicUserReportParams {
+
+    java.lang.String userId;
+    java.lang.String username;
+
+    java.lang.String $toString() {
+        .string contains "PublicUserReportParams";
+    }
+}
+
+
+
+
+class PublicUserStoryInAppReportClient {
+
+    void $<init>(...) {
+        .string "PublicUserStoryInAppReportClientImpl";
+    }
+
+    * report(#StoryMedia, ...)
+}
+
+class FriendStoryInAppReportClient {
+
+    void $<init>(...) {
+        .string "FriendStoryInAppReportClientImpl";
+    }
+
+    * report(#StoryMedia, ...)
+}
+
+class PublisherStoryInAppReportClient {
+
+    void $<init>(...) {
+        .string "PublisherStoryInAppReportClientImpl";
+    }
+
+    * report(#StoryMedia, ...)
+}
+
+class DynamicStoryInAppReportClient {
+
+    void $<init>(...) {
+        .string "DynamicStoryInAppReportClientImpl";
+    }
+
+    * report(#StoryMedia, ...)
+}
+
+class AdInAppReportClient {
+
+    void $<init>(...) {
+        .string "AdInAppReportClientImpl";
+    }
+
+    * report(#StoryMedia, ...)
+}
+
+class ChatMediaInAppReportClient {
+
+    void $<init>(...) {
+        .string "ChatMediaInAppReportClientImpl";
+    }
+
+    * report(#StoryMedia, ...)
+}
+
+class TopicSnapInAppReportClient {
+
+    void $<init>(...) {
+        .string "TopicSnapInAppReportClientImpl";
+    }
+
+    * report(#StoryMedia, ...)
+}
+
+class DirectSnapInAppReportClient {
+
+    void $<init>(...) {
+        .string "DirectSnapInAppReportClientImpl";
+    }
+
+    * report(#StoryMedia, ...)
 }

@@ -30,6 +30,10 @@ public class TypeMatcher implements Matcher<String> {
 
     @Override
     public boolean matches(Resolver resolver, String type) {
+        if (this.typeName.equals("this")) {
+            return resolver.getCurrent().getBound().getType().equals(type);
+        }
+
         if (reference) {
             ClassMatch match = resolver.getResolved(typeName);
             if (match != null) {

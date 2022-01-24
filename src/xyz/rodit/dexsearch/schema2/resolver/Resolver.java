@@ -41,6 +41,8 @@ public class Resolver {
     private final Map<String, String> dexToNice = new HashMap<>();
     private final Map<String, ClassDef> veryLateBindings = new HashMap<>();
 
+    private ClassMatch current;
+
     public Resolver(DexBase dex, Collection<ClassMatcher> classMatchers) {
         this.dex = dex;
         for (ClassMatcher matcher : classMatchers) {
@@ -58,6 +60,10 @@ public class Resolver {
 
     public ClassMatch getResolved(String name) {
         return resolved.get(name);
+    }
+
+    public ClassMatch getCurrent() {
+        return current;
     }
 
     public void unbind(String className) {
@@ -117,7 +123,7 @@ public class Resolver {
         Logger.info("Attempting to resolve %s.", matcher.getName());
         MatchMetrics bestMetrics = new MatchMetrics(null);
         for (ClassDef cls : potential) {
-            ClassMatch match = new ClassMatch(matcher, cls);
+            ClassMatch match = current = new ClassMatch(matcher, cls);
             if (matcher.matches(this, match)) {
                 resolved.put(matcher.getName(), match);
                 Logger.info("Resolved successfully as %s.", DexTypeConverter.toJavaType(match.getBound().getType()));
@@ -399,6 +405,12 @@ public class Resolver {
         }
 
         private Class<?> parseType(final String className) {
+            try {
+                return Class.forName(className);
+            } catch (ClassNotFoundException e) {
+                // ignored
+            }
+
             switch (className) {
                 case "boolean":
                     return boolean.class;

@@ -13,9 +13,12 @@ public class ClassMatch {
     private final ClassMatcher owner;
     private final ClassDef bound;
 
-    private Map<FieldMatcher, Field> fields = new HashMap<>();
-    private Map<MethodMatcher, Method> methods = new HashMap<>();
-    private MatchMetrics metrics = new MatchMetrics(this);
+    private final Map<FieldMatcher, Field> fields = new HashMap<>();
+    private final Map<MethodMatcher, Method> methods = new HashMap<>();
+    private final MatchMetrics metrics = new MatchMetrics(this);
+
+    private final Map<String, Field> fieldNames = new HashMap<>();
+    private final Map<String, Method> methodNames = new HashMap<>();
 
     public ClassMatch(ClassMatcher owner, ClassDef bound) {
         this.owner = owner;
@@ -38,6 +41,14 @@ public class ClassMatch {
         return methods;
     }
 
+    public Field getBoundField(String name) {
+        return fieldNames.get(name);
+    }
+
+    public Method getBoundMethod(String name) {
+        return methodNames.get(name);
+    }
+
     public MatchMetrics getMetrics() {
         return metrics;
     }
@@ -45,11 +56,19 @@ public class ClassMatch {
     public void bind(FieldMatcher matcher, Field field) {
         fields.put(matcher, field);
         metrics.matched(MatchMetrics.FIELD);
+
+        if (!matcher.getName().getName().equals("_")) {
+            fieldNames.put(matcher.getName().getName(), field);
+        }
     }
 
     public void bind(MethodMatcher matcher, Method method) {
         methods.put(matcher, method);
         metrics.matched(MatchMetrics.METHOD);
+
+        if (!matcher.getName().getName().equals("_")) {
+            methodNames.put(matcher.getName().getName(), method);
+        }
     }
 
     @Override

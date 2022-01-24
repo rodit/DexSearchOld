@@ -1072,7 +1072,9 @@ public class SchemaParser extends Parser {
 			return getRuleContext(TypeIdentifierContext.class,0);
 		}
 		public TerminalNode BYTECODE_CALL_SEPARATOR() { return getToken(SchemaParser.BYTECODE_CALL_SEPARATOR, 0); }
-		public TerminalNode IDENTIFIER() { return getToken(SchemaParser.IDENTIFIER, 0); }
+		public IdentifierContext identifier() {
+			return getRuleContext(IdentifierContext.class,0);
+		}
 		public BytecodeCallContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1097,7 +1099,7 @@ public class SchemaParser extends Parser {
 			setState(168);
 			match(BYTECODE_CALL_SEPARATOR);
 			setState(169);
-			match(IDENTIFIER);
+			identifier();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1195,7 +1197,9 @@ public class SchemaParser extends Parser {
 			return getRuleContext(TypeIdentifierContext.class,0);
 		}
 		public TerminalNode BYTECODE_CALL_SEPARATOR() { return getToken(SchemaParser.BYTECODE_CALL_SEPARATOR, 0); }
-		public TerminalNode IDENTIFIER() { return getToken(SchemaParser.IDENTIFIER, 0); }
+		public IdentifierContext identifier() {
+			return getRuleContext(IdentifierContext.class,0);
+		}
 		public BytecodeFieldReferenceContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1220,7 +1224,7 @@ public class SchemaParser extends Parser {
 			setState(179);
 			match(BYTECODE_CALL_SEPARATOR);
 			setState(180);
-			match(IDENTIFIER);
+			identifier();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1970,12 +1974,12 @@ public class SchemaParser extends Parser {
 		"\2\u00a1\u00a0\3\2\2\2\u00a2\u00a5\3\2\2\2\u00a3\u00a1\3\2\2\2\u00a3\u00a4"+
 		"\3\2\2\2\u00a4\u00a6\3\2\2\2\u00a5\u00a3\3\2\2\2\u00a6\u00a7\7\61\2\2"+
 		"\u00a7!\3\2\2\2\u00a8\u00a9\7&\2\2\u00a9\u00aa\5\f\7\2\u00aa\u00ab\7\'"+
-		"\2\2\u00ab\u00ac\7\66\2\2\u00ac#\3\2\2\2\u00ad\u00ae\7(\2\2\u00ae\u00af"+
+		"\2\2\u00ab\u00ac\5\4\3\2\u00ac#\3\2\2\2\u00ad\u00ae\7(\2\2\u00ae\u00af"+
 		"\5\f\7\2\u00af%\3\2\2\2\u00b0\u00b1\7)\2\2\u00b1\u00b2\5\f\7\2\u00b2\'"+
 		"\3\2\2\2\u00b3\u00b4\7*\2\2\u00b4\u00b5\5\f\7\2\u00b5\u00b6\7\'\2\2\u00b6"+
-		"\u00b7\7\66\2\2\u00b7)\3\2\2\2\u00b8\u00b9\7+\2\2\u00b9\u00ba\5\36\20"+
-		"\2\u00ba+\3\2\2\2\u00bb\u00c2\5 \21\2\u00bc\u00c2\5\"\22\2\u00bd\u00c2"+
-		"\5$\23\2\u00be\u00c2\5&\24\2\u00bf\u00c2\5(\25\2\u00c0\u00c2\5*\26\2\u00c1"+
+		"\u00b7\5\4\3\2\u00b7)\3\2\2\2\u00b8\u00b9\7+\2\2\u00b9\u00ba\5\36\20\2"+
+		"\u00ba+\3\2\2\2\u00bb\u00c2\5 \21\2\u00bc\u00c2\5\"\22\2\u00bd\u00c2\5"+
+		"$\23\2\u00be\u00c2\5&\24\2\u00bf\u00c2\5(\25\2\u00c0\u00c2\5*\26\2\u00c1"+
 		"\u00bb\3\2\2\2\u00c1\u00bc\3\2\2\2\u00c1\u00bd\3\2\2\2\u00c1\u00be\3\2"+
 		"\2\2\u00c1\u00bf\3\2\2\2\u00c1\u00c0\3\2\2\2\u00c2-\3\2\2\2\u00c3\u00c7"+
 		"\7\20\2\2\u00c4\u00c5\5,\27\2\u00c5\u00c6\7\63\2\2\u00c6\u00c8\3\2\2\2"+

@@ -55,10 +55,10 @@ bytecodeStringOption: BYTECODE_STRING_IGNORE_CASE
 bytecodeConstValue: INT_LIT ;
 
 bytecodeString: BYTECODE_STRING bytecodeStringOption* STRING_LIT ;
-bytecodeCall: BYTECODE_CALL typeIdentifier BYTECODE_CALL_SEPARATOR IDENTIFIER ;
+bytecodeCall: BYTECODE_CALL typeIdentifier BYTECODE_CALL_SEPARATOR identifier ;
 bytecodeNewInstance: BYTECODE_NEW_INSTANCE typeIdentifier ;
 bytecodeTypeReference: BYTECODE_TYPE_REF typeIdentifier ;
-bytecodeFieldReference: BYTECODE_FIELD_REF typeIdentifier BYTECODE_CALL_SEPARATOR IDENTIFIER ;
+bytecodeFieldReference: BYTECODE_FIELD_REF typeIdentifier BYTECODE_CALL_SEPARATOR identifier ;
 bytecodeConst: BYTECODE_CONST bytecodeConstValue ;
 
 bytecodeIdentifier: bytecodeString

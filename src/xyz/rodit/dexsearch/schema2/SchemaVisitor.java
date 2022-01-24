@@ -99,7 +99,8 @@ public class SchemaVisitor extends SchemaParserBaseVisitor<Matcher<?>> {
 
     @Override
     public MethodBytecodeMatcher.BytecodeCallMatcher visitBytecodeCall(SchemaParser.BytecodeCallContext ctx) {
-        return new MethodBytecodeMatcher.BytecodeCallMatcher(visitTypeIdentifier(ctx.typeIdentifier()), new NameMatcher(ctx.IDENTIFIER().getText(), true));
+        NameMatcher name = visitBytecodeMethodName(ctx.identifier());
+        return new MethodBytecodeMatcher.BytecodeCallMatcher(visitTypeIdentifier(ctx.typeIdentifier()), name);
     }
 
     @Override
@@ -114,7 +115,18 @@ public class SchemaVisitor extends SchemaParserBaseVisitor<Matcher<?>> {
 
     @Override
     public MethodBytecodeMatcher.BytecodeFieldRefMatcher visitBytecodeFieldReference(SchemaParser.BytecodeFieldReferenceContext ctx) {
-        return new MethodBytecodeMatcher.BytecodeFieldRefMatcher(visitTypeIdentifier(ctx.typeIdentifier()), new NameMatcher(ctx.IDENTIFIER().getText(), true));
+        NameMatcher name = visitBytecodeFieldName(ctx.identifier());
+        return new MethodBytecodeMatcher.BytecodeFieldRefMatcher(visitTypeIdentifier(ctx.typeIdentifier()), name);
+    }
+
+    private MethodBytecodeMatcher.BytecodeMethodNameMatcher visitBytecodeMethodName(SchemaParser.IdentifierContext ctx) {
+        boolean reference = ctx.EXACT_MODIFIER() != null;
+        return new MethodBytecodeMatcher.BytecodeMethodNameMatcher(reference ? ctx.getText().substring(1) : ctx.getText(), reference);
+    }
+
+    private MethodBytecodeMatcher.BytecodeFieldNameMatcher visitBytecodeFieldName(SchemaParser.IdentifierContext ctx) {
+        boolean reference = ctx.EXACT_MODIFIER() != null;
+        return new MethodBytecodeMatcher.BytecodeFieldNameMatcher(reference ? ctx.getText().substring(1) : ctx.getText(), reference);
     }
 
     @Override
