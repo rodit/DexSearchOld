@@ -1,4 +1,7 @@
-# DexSearch
+# See [dexsearch](https://github.com/rodit/dexsearch) for the rewritten, updated version.
+This repository is old and no longer maintained.
+
+## DexSearch
 Schematic based pattern search to find obfuscated classes and fields across APK versions.
 
 ## Schematics
